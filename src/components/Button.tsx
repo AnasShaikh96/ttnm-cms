@@ -14,6 +14,8 @@ export default function Button({ title, variant, width, ...rest }: IProps) {
     btnVariant = 'border-black text-white bg-black  hover:text-black hover:bg-white '
   } else if (variant === 'secondary') {
     btnVariant = 'border-black text-black  hover:text-white hover:bg-black '
+  } else {
+    btnVariant = 'border-gray-700 text-black  hover:text-white hover:bg-gray-700 '
   }
 
 
@@ -22,6 +24,8 @@ export default function Button({ title, variant, width, ...rest }: IProps) {
     getWidth = 'w-1/2'
   } else if (width === 'full') {
     getWidth = 'w-full'
+  } else {
+    getWidth = 'w-auto'
   }
 
   return (
