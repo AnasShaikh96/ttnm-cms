@@ -20,10 +20,10 @@ export default function Table() {
             <td className="border border-gray-500 p-2">Some Article Title</td>
             <td className="border border-gray-500 p-2">24-05-2024</td>
             <td className="border border-gray-500 p-2">
-              <div className="flex">
-                <EditIcon />
-                <ViewIcon />
-                <DeleteIcon />
+              <div>
+                <EditIcon classProps={'size-4 inline-block me-2 hover:text-yellow-500 transition-all cursor-pointer'} />
+                <ViewIcon classProps={'size-4 inline-block me-2 hover:text-blue-500 transition-all cursor-pointer'} />
+                <DeleteIcon classProps={'size-4 inline-block me-2 hover:text-red-500 transition-all cursor-pointer'} />
               </div>
             </td>
           </tr>
