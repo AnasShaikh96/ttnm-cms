@@ -11,6 +11,7 @@ export default function NewPost() {
 
     let getContent = window.localStorage.getItem('blogContent');
     let parseContent = getContent && JSON.parse(getContent)
+
     setValue(parseContent)
   }, [])
 
