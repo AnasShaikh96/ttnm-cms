@@ -1,4 +1,5 @@
 import HomeIcon from '../../assets/icons/HomeIcon'
+import Pencilicon from '../../assets/icons/Pencilicon'
 import PostIcon from '../../assets/icons/PostIcon'
 
 export default function Sidebar() {
@@ -19,6 +20,10 @@ export default function Sidebar() {
         <li className="w-full px-3 py-3 hover:bg-zinc-200 hover:text-gray-900 rounded-lg transition-all cursor-pointer flex">
           <PostIcon classProps={"me-3"} />
           Posts
+        </li>
+        <li className="w-full px-3 py-3 hover:bg-zinc-200 hover:text-gray-900 rounded-lg transition-all cursor-pointer flex">
+          <Pencilicon classProps={"me-3 size-6"} />
+          Drafts
         </li>
       </ul>
     </section>
