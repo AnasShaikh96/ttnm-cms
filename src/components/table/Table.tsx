@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import DeleteIcon from "../../assets/icons/DeleteIcon";
 import EditIcon from "../../assets/icons/EditIcon";
 import ViewIcon from "../../assets/icons/ViewIcon";
@@ -20,21 +21,29 @@ export default function Table({ tableHeaders, tableData }: TableProps) {
                 {item.name}
               </th>
             ))}
-
+            <th className="font-semibold border border-gray-500 p-2">Actions</th>
           </tr>
         </thead>
         <tbody>
 
           {tableData.map((tRow: { [key: string]: any }, index: number) => (
-            <tr key={index}>
+            <tr key={tRow.id}>
               {tableHeaders.map((tHeader) => (
-                <td>{tRow[tHeader.field]}</td>
+                <td className="border border-gray-500 p-2">{tRow[tHeader.field]}</td>
               ))}
               <td className="border border-gray-500 p-2">
                 <div>
-                  <EditIcon classProps={'size-4 inline-block me-2 hover:text-yellow-500 transition-all cursor-pointer'} />
-                  <ViewIcon classProps={'size-4 inline-block me-2 hover:text-blue-500 transition-all cursor-pointer'} />
-                  <DeleteIcon classProps={'size-4 inline-block me-2 hover:text-red-500 transition-all cursor-pointer'} />
+                  <Link to={'/edit-post/1'}>
+                    <EditIcon classProps={'size-4 inline-block me-2 hover:text-yellow-500 transition-all cursor-pointer'} />
+                  </Link>
+
+                  <Link to={'/view'}>
+                    <ViewIcon classProps={'size-4 inline-block me-2 hover:text-blue-500 transition-all cursor-pointer'} />
+                  </Link>
+
+                  <Link to={'/delete'}>
+                    <DeleteIcon classProps={'size-4 inline-block me-2 hover:text-red-500 transition-all cursor-pointer'} />
+                  </Link>
                 </div>
               </td>
             </tr>
