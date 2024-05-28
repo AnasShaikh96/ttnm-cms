@@ -14,7 +14,7 @@ const UserModel = new mongoose.Schema({
   },
   password: {
     type: String
-  },
+  }
 })
 
 
