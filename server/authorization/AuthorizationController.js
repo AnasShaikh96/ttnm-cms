@@ -32,7 +32,7 @@ module.exports = {
       const encryptedPassword = encryptPassword(password);
       const token = generateAccessToken(email, password)
 
-      const user = await UserModel.create({ firstName, lastName, email, encryptedPassword });
+      const user = await UserModel.create({ firstName, lastName, email, password: encryptedPassword });
       res.status(200).json({
         status: true,
         data: user,
@@ -49,6 +49,39 @@ module.exports = {
       })
 
     }
+  },
+
+  login: async (req, res) => {
+
+    try {
+      const { email, password } = req.body;
+
+      if (!email || !password) {
+        throw new Error('Email or Password missing');
+      }
+
+      const encryptedPassword = encryptPassword(password)
+      const token = generateAccessToken(email, password)
+      const user = await UserModel.find({ email });
+
+      console.log('user', user)
+
+      res.status(200).json({
+        status: true,
+        data: user,
+        token
+      })
+
+    } catch (error) {
+      res.status(500).json({
+        status: false,
+        error: {
+          message: error.message
+        }
+      })
+    }
+
+
   }
 
 
