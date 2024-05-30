@@ -82,7 +82,36 @@ module.exports = {
     }
 
 
-  }
+  },
+  reset: async (req, res) => {
 
+    try {
+      const { email, password } = req.body;
+
+
+      if (!email || !password) {
+        throw new Error('Email not found')
+      }
+
+      const encryptedPassword = encryptPassword(password)
+
+      const user = await UserModel.find({ email });
+      const updateUser = await UserModel.update({ id: user.id }, { password: encryptedPassword })
+
+      res.status(200).json({
+        status: true,
+        data: updateUser
+      })
+
+    } catch (error) {
+      res.status(500).json({
+        status: false,
+        error: {
+          message: error.message
+        }
+      })
+    }
+
+  }
 
 }

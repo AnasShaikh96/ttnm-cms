@@ -28,4 +28,7 @@ module.exports = {
   find: (query) => {
     return this.model.find(query)
   },
+  update: (query) => {
+    return this.query.update(query)
+  }
 } 
