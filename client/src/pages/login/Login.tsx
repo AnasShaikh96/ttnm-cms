@@ -14,9 +14,9 @@ export default function Login() {
           <Input variant="outlined" color="gray" label="Password" type="password" placeholder="Password" crossOrigin={undefined} />
         </div>
 
-        <div className="grid grid-cols-1 gap-y-4">
-          <Button variant="filled" color="deep-purple">Login</Button>
+        <div className="grid grid-cols-2 gap-x-4">
           <Button variant="outlined" color="deep-purple">Sign Up</Button>
+          <Button variant="filled" color="deep-purple">Login</Button>
         </div>
 
       </div>
