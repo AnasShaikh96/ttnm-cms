@@ -1,4 +1,6 @@
-import Button from "../../components/Button";
+// import Button from "../../components/Button";
+
+import { Button } from "@material-tailwind/react";
 
 export default function Login() {
   return (
@@ -14,8 +16,7 @@ export default function Login() {
         <input type="password" name="email" className="w-full border p-2 mb-6 rounded-lg" />
 
         <div className="grid grid-cols-2 gap-x-4">
-          <Button title="Sign Up" variant="secondary" />
-          <Button title="Login" variant="primary" />
+          <Button variant="filled"> Sign Up</Button>
         </div>
 
       </div>
