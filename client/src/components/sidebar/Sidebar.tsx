@@ -1,37 +1,34 @@
-import { NavLink } from 'react-router-dom'
-// import HomeIcon from '../../assets/icons/HomeIcon'
-// import Pencilicon from '../../assets/icons/Pencilicon'
-// import PostIcon from '../../assets/icons/PostIcon'
+import { NavLink, useLocation } from 'react-router-dom'
 import {
   Card,
-  Typography,
   List,
   ListItem,
   ListItemPrefix,
-  ListItemSuffix,
-  Chip,
 } from "@material-tailwind/react";
 import {
   PresentationChartBarIcon,
-  ShoppingBagIcon,
-  UserCircleIcon,
-  Cog6ToothIcon,
-  InboxIcon,
-  PowerIcon,
   PencilSquareIcon,
   NewspaperIcon,
 } from "@heroicons/react/24/outline";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 
 export default function Sidebar() {
 
-  // const [iconColor, setIconColor] = useState({ module: ''})
+  const location = useLocation();
 
   const [activeModule, setActiveModule] = useState('')
 
-  let activeTab: string = 'bg-violet-100 rounded-lg text-black';
+  useEffect(() => {
+
+    const splitUrl = location.pathname.split(',');
+    setActiveModule(splitUrl[0])
+
+  }, [location.pathname])
+
+  let isTabActive: string = 'bg-violet-100 rounded-lg text-black bg-opacity-100';
+  let IsIconActive: string = "[&>svg]:stroke-violet-700 fill-violet-700";
 
   const sidebarContent = [
     {
@@ -60,18 +57,9 @@ export default function Sidebar() {
       <List>
         {sidebarContent.map((item) => {
           return (
-            <NavLink key={item.label} to={item.route} className={({ isActive }) => {
-
-              if (isActive) {
-                setActiveModule(item.label)
-                return activeTab
-              } else {
-                setActiveModule('')
-                return ''
-              }
-            }} >
-              <ListItem className={`text-sm text-black hover:bg-violet-50 active:${activeModule === item.label ? activeTab : ''}`}>
-                <ListItemPrefix className={`[&>svg:stroke-violet-600]`}>
+            <NavLink key={item.label} to={item.route} className={({ isActive }) => isActive ? isTabActive : ''} >
+              <ListItem className={`text-sm text-black hover:bg-violet-50 focus:${isTabActive} active:${isTabActive}`} selected={activeModule === item.route}>
+                <ListItemPrefix className={activeModule === item.route ? IsIconActive : ''}>
                   {item.icon}
                 </ListItemPrefix>
                 {item.label}
@@ -80,7 +68,7 @@ export default function Sidebar() {
           )
         })}
       </List>
-    </Card>
+    </Card >
 
   )
 }
