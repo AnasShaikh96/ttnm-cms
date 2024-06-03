@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
-import Table from "../../components/table/Table";
+import  { SortableTable } from "../../components/table/Table";
 
 export default function Posts() {
   const navigate = useNavigate()
@@ -36,7 +36,9 @@ export default function Posts() {
       </div>
 
       <div>
-        <Table tableHeaders={postHeader} tableData={postData} />
+        {/* <Table tableHeaders={postHeader} tableData={postData} /> */}
+        <SortableTable />
+
       </div>
     </section>
   )

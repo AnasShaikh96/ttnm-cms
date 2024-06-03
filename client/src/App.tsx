@@ -10,7 +10,7 @@ import Drafts from './pages/drafts/Drafts';
 function App() {
   return (
     <>
-      <main className='bg-gray-100'>
+      <main className='bg-gray-50 h-screen '>
         <Routes>
           <Route path='/' element={<Login />} />
           <Route path='/register' element={<Register />} />

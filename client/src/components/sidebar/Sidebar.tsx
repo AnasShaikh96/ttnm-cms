@@ -50,7 +50,7 @@ export default function Sidebar() {
 
 
   return (
-    <Card className="h-screen w-full max-w-[17rem] p-4 fixed">
+    <Card className="h-screen w-full max-w-[17rem] p-4 fixed rounded-none top-20 left-0">
       <div className="mb-2 p-4">
         <h2 className="text-3xl text-black font-serif font-bold ">Clone<span className="text-deep-purple-600 underline underline-offset-4">ium</span></h2>
       </div>
