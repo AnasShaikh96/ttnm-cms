@@ -1,4 +1,4 @@
-import Table from "../../components/table/Table"
+// import Table from "../../components/table/Table"
 
 export default function Drafts() {
 
@@ -25,7 +25,7 @@ export default function Drafts() {
         <h2 className="text-2xl font-semibold">Drafts</h2>
       </div>
       <div>
-        <Table tableData={postData} tableHeaders={postHeader} />
+        {/* <Table tableData={postData} tableHeaders={postHeader} /> */}
       </div>
     </section>
 
