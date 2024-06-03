@@ -8,7 +8,7 @@ export default function Layout() {
     <>
       <NavbarSimple />
       <Sidebar />
-      <section className="ms-[18.5rem] pt-5 me-5">
+      <section className="ms-[18.5rem] pt-5 pe-5 overflow-auto h-[calc(100%-62px)]">
         <Outlet />
       </section>
     </>
