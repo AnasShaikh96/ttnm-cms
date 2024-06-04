@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 import Dashboard from './pages/dashboard/Dashboard';
@@ -7,7 +7,23 @@ import NewPost from './pages/posts/NewPost';
 import Layout from './components/layout/Layout';
 import Drafts from './pages/drafts/Drafts';
 
+import "preline/preline";
+import { IStaticMethods } from "preline/preline";
+import { useEffect } from 'react';
+declare global {
+  interface Window {
+    HSStaticMethods: IStaticMethods;
+  }
+}
+
+
 function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.HSStaticMethods.autoInit();
+  }, [location.pathname]);
+
   return (
     <>
       <main className='bg-gray-50 h-screen overflow-hidden'>

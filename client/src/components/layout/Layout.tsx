@@ -6,7 +6,7 @@ export default function Layout() {
 
   return (
     <>
-      <NavbarSimple />
+      {/* <NavbarSimple /> */}
       <Sidebar />
       <section className="ms-[18.5rem] pt-5 pe-5 overflow-auto h-[calc(100%-62px)]">
         <Outlet />
