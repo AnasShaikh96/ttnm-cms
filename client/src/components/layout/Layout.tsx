@@ -6,11 +6,13 @@ export default function Layout() {
 
   return (
     <>
-      {/* <NavbarSimple /> */}
+      <NavbarSimple />
       <Sidebar />
-      <section className="ms-[18.5rem] pt-5 pe-5 overflow-auto h-[calc(100%-62px)]">
-        <Outlet />
-      </section>
+      <div className="w-full lg:ps-64">
+        <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+          <Outlet />
+        </div>
+      </div>
     </>
   )
 
