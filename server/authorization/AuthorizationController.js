@@ -33,24 +33,19 @@ module.exports = {
       const token = generateAccessToken(email, password)
 
       const user = await UserModel.create({ firstName, lastName, email, password: encryptedPassword });
-      res.end(200).json({
+      res.status(200).json({
         status: true,
         data: user,
         token
       })
 
     } catch (error) {
-
-      console.log(error)
-
-
-      // res.status(500).json({
-      //   status: false,
-      //   error: {
-      //     message: error.message
-      //   }
-      // })
-
+      res.status(500).json({
+        status: false,
+        error: {
+          message: error.message
+        }
+      })
     }
   },
 
@@ -67,33 +62,21 @@ module.exports = {
       const token = generateAccessToken(email, password)
       const user = await UserModel.find({ email });
 
-      // console.log('user', user)
 
-      // res.status(200).json({
-      //   status: true,
-      //   data: user,
-      //   token
-      // })
-
-
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.write(JSON.stringify({
+      res.status(200).json({
         status: true,
         data: user,
         token
-      }));
-
-      res.end();
+      })
 
     } catch (error) {
-      console.log(error)
 
-      // res.status(500).json({
-      //   status: false,
-      //   error: {
-      //     message: error.message
-      //   }
-      // })
+      res.status(500).json({
+        status: false,
+        error: {
+          message: error.message
+        }
+      })
     }
 
 
