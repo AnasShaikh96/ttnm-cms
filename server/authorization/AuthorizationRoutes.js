@@ -1,6 +1,4 @@
 const AuthorizationController = require('./AuthorizationController');
-const { parse } = require('querystring')
-
 const router = require('express').Router();
 
 router.post('/register', AuthorizationController.register)

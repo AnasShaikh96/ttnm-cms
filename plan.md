@@ -27,3 +27,14 @@ Technical Outline include :-
 - Should have a genre attached to it and should appear on that genre listing. 
 - Should be Shareable  
 - Archieves.
+
+
+what tech stack am I planning to use in this project?
+- React Typescript
+- Tailwind : Preline UI
+- Express 
+- MongoDb
+
+to be added 
+- React Testing Library , Jest
+- 
