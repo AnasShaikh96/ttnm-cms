@@ -37,4 +37,4 @@ what tech stack am I planning to use in this project?
 
 to be added 
 - React Testing Library , Jest
-- 
+- Sonarqube
