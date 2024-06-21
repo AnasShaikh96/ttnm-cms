@@ -1,44 +1,29 @@
-import { useNavigate } from "react-router-dom";
-import Button from "../../components/Button";
-import { SortableTable } from "../../components/table/Table";
-
 export default function Posts() {
-  const navigate = useNavigate()
-
 
   const postHeader = [
-    { name: 'Impression', field: 'impression' },
-    { name: 'Clicks', field: 'clicks' },
-    { name: 'CTR', field: 'ctr' },
-    { name: 'Engagement Rate', field: 'engagement_rate' },
+    { name: 'Title', field: 'title' },
+    { name: 'Slug Name', field: 'slug_name' },
+    { name: 'Status', field: 'status' },
+    { name: 'Created At', field: 'created_at' },
+    { name: 'Last Updated', field: 'last_updated' },
   ]
 
   const postData = [
     {
       id: 'oiasd-oihasdi-poaisjd',
-      clicks: 9879,
-      impression: 654,
-      ctr: 1231,
-      engagement_rate: 213
+      title: 'A day in a life',
+      slug_name: '/day-in-life',
+      status: 'active',
+      created_at: '12-12-2024',
+      last_updated: '12-12-2023',
     }
   ]
-
-  const HandleClick = () => {
-    navigate('/new-post')
-  }
 
 
   return (
     <section>
-      {/* <div className="flex justify-between mb-10">
-        <h2 className="text-2xl font-semibold">Posts</h2>
-        <Button title="New Article" onClick={HandleClick} />
-      </div> */}
 
       <div>
-        {/* <Table tableHeaders={postHeader} tableData={postData} /> */}
-        {/* <SortableTable /> */}
-
         <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-4 lg:py-4 mx-auto">
           <div className="flex flex-col">
             <div className="-m-1.5 overflow-x-auto">
@@ -71,81 +56,80 @@ export default function Posts() {
                   <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
                     <thead className="bg-gray-50 dark:bg-neutral-800">
                       <tr>
-                        {/* <th scope="col" className="ps-6 py-3 text-start">
-                          <label htmlFor="hs-at-with-checkboxes-main" className="flex">
-                            <input type="checkbox" className="shrink-0 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-at-with-checkboxes-main" />
-                            <span className="sr-only">Checkbox</span>
-                          </label>
-                        </th> */}
 
-                        <th scope="col" className="ps-6 lg:ps-3 xl:ps-3 pe-6 py-3 text-start">
-                          <div className="flex items-center gap-x-2">
-                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
-                              Title
-                            </span>
-                          </div>
-                        </th>
-
-                        <th scope="col" className="px-6 py-3 text-start">
-                          <div className="flex items-center gap-x-2">
-                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
-                              Slug Name
-                            </span>
-                          </div>
-                        </th>
-
-                        <th scope="col" className="px-6 py-3 text-start">
-                          <div className="flex items-center gap-x-2">
-                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
-                              Status
-                            </span>
-                          </div>
-                        </th>
-
-                        <th scope="col" className="px-6 py-3 text-start">
-                          <div className="flex items-center gap-x-2">
-                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
-                              Created
-                            </span>
-                          </div>
-                        </th>
-
-                        <th scope="col" className="px-6 py-3 text-start">
-                          <div className="flex items-center gap-x-2">
-                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
-                              Last Updated
-                            </span>
-                          </div>
-                        </th>
-
+                        {postHeader.map((item) => (
+                          <th scope="col" className="ps-6 lg:ps-3 xl:px-3  py-3 text-start">
+                            <div className="flex items-center gap-x-2">
+                              <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
+                                {item.name}
+                              </span>
+                            </div>
+                          </th>
+                        ))}
                         <th scope="col" className="px-6 py-3 text-end"></th>
                       </tr>
                     </thead>
 
                     <tbody className="divide-y divide-gray-200 dark:divide-neutral-700">
                       <tr>
-                        {/* <td className="size-px whitespace-nowrap">
-                          <div className="ps-6 py-3">
-                            <label htmlFor="hs-at-with-checkboxes-1" className="flex">
-                              <input type="checkbox" className="shrink-0 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-at-with-checkboxes-1" />
-                              <span className="sr-only">Checkbox</span>
-                            </label>
-                          </div>
-                        </td> */}
+                        {postHeader.map((row: any, rowIndex) =>
+
+                          postData.map((item: any, index) => {
+                            if (row.field === 'title') {
+                              return (
+                                <td className="size-px whitespace-nowrap">
+                                  <div className="ps-6 lg:ps-3 xl:ps-3 pe-6 py-3">
+                                    <div className="flex items-center gap-x-3">
+                                      <div className="grow">
+                                        <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">
+                                          {item[row.field]}
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </td>
+                              )
+                            } else if (row.field === 'status') {
+                              return (<td className="size-px whitespace-nowrap">
+                                <div className="px-6 py-3">
+                                  <span className="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
+                                    <svg className="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                    </svg>
+                                    {item[row.field]}
+                                  </span>
+                                </div>
+                              </td>)
+                            } else {
+                              return (
+                                <td className="size-px whitespace-nowrap">
+                                  <div className="px-3 py-3">
+                                    <span className="block text-sm text-gray-500 dark:text-neutral-500">
+                                      {item[row.field]}
+                                    </span>
+                                  </div>
+                                </td>
+                              )
+                            }
+
+                          })
+                        )}
+                      </tr>
+
+
+                      {/* <tr>
                         <td className="size-px whitespace-nowrap">
                           <div className="ps-6 lg:ps-3 xl:ps-3 pe-6 py-3">
                             <div className="flex items-center gap-x-3">
-                              {/* <img className="inline-block size-[38px] rounded-full" src="https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Description" /> */}
+
                               <div className="grow">
                                 <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">Christina Bersh</span>
-                                {/* <span className="block text-sm text-gray-500 dark:text-neutral-500">christina@site.com</span> */}
                               </div>
                             </div>
                           </div>
                         </td>
-                        <td className="h-px w-72 whitespace-nowrap">
-                          <div className="px-6 py-3">
-                            {/* <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">Director</span> */}
+                        <td className="size-px whitespace-nowrap">
+                          <div className="px-3 py-3">
                             <span className="block text-sm text-gray-500 dark:text-neutral-500">Human resources</span>
                           </div>
                         </td>
@@ -160,14 +144,6 @@ export default function Posts() {
                           </div>
                         </td>
                         <td className="size-px whitespace-nowrap">
-                          {/* <div className="px-6 py-3">
-                            <div className="flex items-center gap-x-3">
-                              <span className="text-xs text-gray-500 dark:text-neutral-500">1/5</span>
-                              <div className="flex w-full h-1.5 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700">
-                          
-                              </div>
-                            </div>
-                          </div> */}
                           <div className="px-6 py-3">
                             <span className="text-sm text-gray-500 dark:text-neutral-500">28 Dec, 12:12</span>
                           </div>
@@ -184,7 +160,7 @@ export default function Posts() {
                             </a>
                           </div>
                         </td>
-                      </tr>
+                      </tr> */}
 
                       {/* <tr>
                         <td className="size-px whitespace-nowrap">
