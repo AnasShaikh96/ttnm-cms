@@ -8,7 +8,6 @@ import PostIcon from "../../assets/icons/PostIcon";
 export default function Sidebar() {
   return (
     <>
-
       <div className="sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden dark:bg-neutral-800 dark:border-neutral-700">
         <div className="flex justify-between items-center py-2">
           <ol className="ms-3 flex items-center whitespace-nowrap">
@@ -55,9 +54,8 @@ export default function Sidebar() {
               <NavLink to="/posts" className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-300" >
                 <PostIcon />
                 Posts
-              </NavLink></li>
-
-
+              </NavLink>
+            </li>
             <li>
               <NavLink to="/drafts" className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300" >
                 <DraftsIcon />
