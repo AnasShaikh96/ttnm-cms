@@ -1,12 +1,58 @@
 export default function Posts() {
 
   const postHeader = [
-    { name: 'Title', field: 'title' },
+    {
+      name: 'Title',
+      field: 'title',
+      cellEdit: function (cell: any) {
+        return (<td className="size-px whitespace-nowrap">
+          <div className="ps-6 lg:ps-3 xl:ps-3 pe-6 py-3">
+            <div className="flex items-center gap-x-3">
+              <div className="grow">
+                <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{cell[this.field] ?? ''} </span>
+              </div>
+            </div>
+          </div>
+        </td>)
+      },
+    },
     { name: 'Slug Name', field: 'slug_name' },
-    { name: 'Status', field: 'status' },
+    {
+      name: 'Status',
+      field: 'status',
+      cellEdit: function (cell: any) {
+        return (
+          <td className="size-px whitespace-nowrap">
+            <div className="px-3 py-3">
+              <span className="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
+                <svg className="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                </svg>
+                {cell[this.field] ?? ''}
+              </span>
+            </div>
+          </td>
+        )
+      }
+    },
     { name: 'Created At', field: 'created_at' },
     { name: 'Last Updated', field: 'last_updated' },
-    { name: '', field: 'link' },
+    {
+      name: '',
+      field: 'link',
+      cellEdit: function (cell: any) {
+        return (
+          <td className="size-px whitespace-nowrap">
+            <div className="px-6 py-1.5">
+              <a className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500" href={cell[this.field]}>
+                Edit
+              </a>
+            </div>
+          </td>
+        )
+
+      }
+    },
   ]
 
   const postData = [
@@ -82,46 +128,12 @@ export default function Posts() {
 
                       {postData.map((cell: any) => {
 
-                        const getData = postHeader.map((row: any, rowIndex) => {
+                        const getData = postHeader.map((row: any) => {
 
-
-                          if (row.field === 'title') {
-
-                            return (
-                              <td className="size-px whitespace-nowrap">
-                                <div className="ps-6 lg:ps-3 xl:ps-3 pe-6 py-3">
-                                  <div className="flex items-center gap-x-3">
-                                    <div className="grow">
-                                      <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{cell[row.field]}</span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </td>)
-
-                          } else if (row.field === 'status') {
-                            return (
-                              <td className="size-px whitespace-nowrap">
-                                <div className="px-3 py-3">
-                                  <span className="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
-                                    <svg className="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                                    </svg>
-                                    {cell[row.field]}
-                                  </span>
-                                </div>
-                              </td>
-                            )
-                          } else if (row.field === 'link') {
-                            return (
-                              <td className="size-px whitespace-nowrap">
-                                <div className="px-6 py-1.5">
-                                  <a className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500" href="/">
-                                    Edit
-                                  </a>
-                                </div>
-                              </td>
-                            )
-                          } else {
+                          if (row.cellEdit !== undefined) {
+                            return row.cellEdit(cell)
+                          }
+                          else {
 
                             return (
                               <td className="size-px whitespace-nowrap">
