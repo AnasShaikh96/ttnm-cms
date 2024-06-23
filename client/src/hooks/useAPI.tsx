@@ -26,8 +26,30 @@ const useAPI = () => {
 
   }
 
+
+
+  const getData = async (url: string) => {
+
+    try {
+
+      const response = await AXIOS.get(url, {
+        headers: { "Content-Type": "application/json" }
+      })
+
+      setData(response.data)
+
+    } catch (error) {
+
+      setData([])
+
+    }
+
+
+  }
+
   return {
     data,
+    getData,
     postData
   }
 

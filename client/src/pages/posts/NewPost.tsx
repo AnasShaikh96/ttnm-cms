@@ -13,10 +13,6 @@ export default function NewPost() {
 
   const [contentData, setcontentData] = useState([])
 
-
-  // useEffect(() => {
-  // }, [value])
-
   useEffect(() => {
 
     let getContent = window.localStorage.getItem('blogContent');
@@ -45,10 +41,6 @@ export default function NewPost() {
   const HandleClick = () => {
     fetchContentAPI()
   }
-
-
-  console.log(contentData)
-
 
   return (
     <section className="p-4">

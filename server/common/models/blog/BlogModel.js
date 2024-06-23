@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 const BlogModel = new mongoose.Schema({
   title: { type: String },
   content: { type: String },
+  status: { type: String, default: 'Active' },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 })
@@ -17,5 +18,8 @@ module.exports = {
   },
   create: (blog) => {
     return this.model.create(blog)
+  },
+  find: (blog) => {
+    return this.model.find(blog)
   },
 }

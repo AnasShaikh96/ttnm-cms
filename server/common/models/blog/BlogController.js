@@ -29,5 +29,25 @@ module.exports = {
       })
     }
 
+  },
+  findAllBlogs: async (req, res) => {
+
+    try {
+
+      const getBlogs = await BlogModel.find()
+      res.status(200).json({
+        status: true,
+        data: getBlogs
+      })
+
+    } catch (error) {
+      res.status(500).json({
+        status: false,
+        error: {
+          message: 'An error occured'
+        }
+      })
+    }
+
   }
 }

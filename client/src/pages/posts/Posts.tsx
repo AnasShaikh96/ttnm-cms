@@ -3,8 +3,12 @@ import PlusIcon from "../../assets/icons/PlusIcon"
 import LinkCell from "../../components/Cell/LinkCell"
 import StatusCell from "../../components/Cell/StatusCell"
 import TitleCell from "../../components/Cell/TitleCell"
+import { useEffect, useState } from "react"
+import useAPI from "../../hooks/useAPI"
 
 export default function Posts() {
+
+  const postsApi = useAPI()
 
   const postHeader = [
     {
@@ -24,8 +28,8 @@ export default function Posts() {
 
       }
     },
-    { name: 'Created At', field: 'created_at' },
-    { name: 'Last Updated', field: 'last_updated' },
+    { name: 'Created At', field: 'createdAt' },
+    { name: 'Last Updated', field: 'updatedAt' },
     {
       name: '',
       field: 'link',
@@ -35,25 +39,33 @@ export default function Posts() {
     },
   ]
 
-  const postData = [
-    {
-      id: 'oiasd-oihasdi-poaisjd',
-      title: 'A day in a life',
-      slug_name: '/day-in-life',
-      status: 'active',
-      created_at: '12-12-2024',
-      last_updated: '12-12-2023',
-    },
-    {
-      id: 'oiasd-oihasdi-poajd',
-      title: 'Two day in a life',
-      slug_name: '/two-day',
-      status: 'active',
-      created_at: '12-12-2024',
-      last_updated: '12-12-2023',
-    },
-  ]
 
+  const [postData, setPostData] = useState<any>([])
+
+  useEffect(() => {
+
+    const fetchAllPosts = async () => {
+      await postsApi.getData('/blog/findAll');
+    }
+
+    fetchAllPosts()
+  }, [])
+
+  useEffect(() => {
+
+
+    const rawData: any = postsApi.data;
+
+    const formattedData = rawData?.data?.map(({ title, ...rest }: { title: string, rest: any }) => ({
+      title,
+      slug_name: `/${title.replaceAll(" ", "-").toLowerCase()}`,
+      ...rest
+    })) ?? []
+
+    setPostData(formattedData)
+
+
+  }, [postsApi.data])
 
   return (
     <section>
@@ -130,7 +142,7 @@ export default function Posts() {
                   <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-neutral-700">
                     <div>
                       <p className="text-sm text-gray-600 dark:text-neutral-400">
-                        <span className="font-semibold text-gray-800 dark:text-neutral-200">12</span> results
+                        <span className="font-semibold text-gray-800 dark:text-neutral-200">{postData.length ?? 0}</span> results
                       </p>
                     </div>
 
