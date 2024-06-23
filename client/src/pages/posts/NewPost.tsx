@@ -1,11 +1,21 @@
 import { useEffect, useState } from "react";
 import TextEditor from "../../components/textEditor/TextEditor";
 import Button from "../../components/Button";
+import useAPI from "../../hooks/useAPI";
 
 
 export default function NewPost() {
-  const [value, setValue] = useState('');
 
+  const contentAPI = useAPI();
+
+  const [value, setValue] = useState('');
+  const [title, setTitle] = useState('');
+
+  const [contentData, setcontentData] = useState([])
+
+
+  // useEffect(() => {
+  // }, [value])
 
   useEffect(() => {
 
@@ -22,6 +32,23 @@ export default function NewPost() {
   }, [value])
 
 
+  const fetchContentAPI = async () => {
+
+    await contentAPI.postData('/blog/create', { title, content: value })
+
+    setcontentData(contentAPI.data)
+
+  }
+
+
+
+  const HandleClick = () => {
+    fetchContentAPI()
+  }
+
+
+  console.log(contentData)
+
 
   return (
     <section className="p-4">
@@ -34,11 +61,11 @@ export default function NewPost() {
           <label className="text-xl font-normal" htmlFor="title">
             Blog Title
           </label>
-          <input type="text" className="border block px-2 py-2 w-full rounded-lg focus:outline-gray-300" />
+          <input type="text" className="border block px-2 py-2 w-full rounded-lg focus:outline-gray-300" onChange={(e) => setTitle(e.target.value)} />
         </div>
         <div className="flex items-end justify-end">
           <Button title="Save as Draft" variant="secondary" classProps="me-3" />
-          <Button title="Post" variant="primary" />
+          <Button title="Post" variant="primary" onClick={() => HandleClick()} />
         </div>
       </div>
 
