@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import TextEditor from "../../components/textEditor/TextEditor";
 import Button from "../../components/Button";
 import useAPI from "../../hooks/useAPI";
+import { useNavigate } from "react-router-dom";
 
 
 export default function NewPost() {
+
+  const navigate = useNavigate()
 
   const contentAPI = useAPI();
 
@@ -30,7 +33,9 @@ export default function NewPost() {
 
   const fetchContentAPI = async () => {
 
-    await contentAPI.postData('/blog/create', { title, content: value })
+    await contentAPI.postData('/blog/create', { title, content: value }).then(() => {
+      navigate('/posts')
+    })
 
     setcontentData(contentAPI.data)
 
@@ -39,7 +44,7 @@ export default function NewPost() {
 
 
   const HandleClick = () => {
-    fetchContentAPI()
+    fetchContentAPI();
   }
 
   return (

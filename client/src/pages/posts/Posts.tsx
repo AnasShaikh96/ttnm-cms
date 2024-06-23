@@ -56,11 +56,22 @@ export default function Posts() {
 
     const rawData: any = postsApi.data;
 
-    const formattedData = rawData?.data?.map(({ title, ...rest }: { title: string, rest: any }) => ({
-      title,
-      slug_name: `/${title.replaceAll(" ", "-").toLowerCase()}`,
-      ...rest
-    })) ?? []
+    const formattedData = rawData?.data?.map(({ title, createdAt, updatedAt, ...rest }: { title: string, createdAt: Date, updatedAt: Date, rest: any }) => {
+
+
+      const formatDate = (getDate: Date) => new Date(getDate).toLocaleDateString('en-IN',
+        { timeZone: 'IST', month: "short", day: "2-digit", year: "numeric", hour: '2-digit', minute: '2-digit' },
+      )
+
+
+      return {
+        title,
+        slug_name: `/${title.replaceAll(" ", "-").toLowerCase()}`,
+        createdAt: formatDate(createdAt),
+        updatedAt: formatDate(updatedAt),
+        ...rest
+      }
+    }) ?? []
 
     setPostData(formattedData)
 
