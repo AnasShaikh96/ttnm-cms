@@ -24,7 +24,7 @@ export default function NewPost() {
 
 
   return (
-    <section>
+    <section className="p-4">
       <div className="flex justify-between mb-10">
         <h2 className="text-3xl font-semibold">What's in your mind today?</h2>
       </div>
@@ -51,8 +51,5 @@ export default function NewPost() {
         </div>
       </div>
     </section>
-
-
-
   )
 }
