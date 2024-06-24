@@ -34,7 +34,7 @@ export default function Posts() {
       name: '',
       field: 'link',
       cellEdit: function (cell: any) {
-        return <LinkCell link={cell[this.field]} />
+        return <LinkCell cell={cell} />
       }
     },
   ]

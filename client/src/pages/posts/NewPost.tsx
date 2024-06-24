@@ -16,19 +16,19 @@ export default function NewPost() {
 
   const [contentData, setcontentData] = useState([])
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    let getContent = window.localStorage.getItem('blogContent');
-    let parseContent = getContent ? JSON.parse(getContent) : '';
+  //   let getContent = window.localStorage.getItem('blogContent');
+  //   let parseContent = getContent ? JSON.parse(getContent) : '';
 
-    setValue(parseContent)
-  }, [])
+  //   setValue(parseContent)
+  // }, [])
 
-  useEffect(() => {
-    if (value.length !== 0) {
-      window.localStorage.setItem('blogContent', JSON.stringify(value))
-    }
-  }, [value])
+  // useEffect(() => {
+  //   if (value.length !== 0) {
+  //     window.localStorage.setItem('blogContent', JSON.stringify(value))
+  //   }
+  // }, [value])
 
 
   const fetchContentAPI = async () => {
