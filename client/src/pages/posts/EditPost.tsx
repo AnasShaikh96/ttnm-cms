@@ -1,10 +1,19 @@
 import { useEffect, useState } from "react";
 import TextEditor from "../../components/textEditor/TextEditor";
 import Button from "../../components/Button";
+import { useLocation } from "react-router-dom";
+import useAPI from "../../hooks/useAPI";
 
 
 export default function EditPost() {
   const [value, setValue] = useState('');
+
+  const location = useLocation();
+  const splitURL = location.pathname.split('/');
+
+  console.log(splitURL[2])
+
+  const getEditBlog = useAPI()
 
 
   // useEffect(() => {
@@ -21,6 +30,29 @@ export default function EditPost() {
   //   }
   // }, [value])
 
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+
+    const fetchEditData = async () => {
+
+      await getEditBlog.getData(`/blog/findOne?id=${splitURL[2]}`)
+    }
+    fetchEditData()
+
+
+  }, [])
+
+  useEffect(() => {
+
+    const getData = getEditBlog.data
+
+    setData(getData)
+  }, [getEditBlog.data])
+
+
+
+  console.log('data', data)
 
 
   return (

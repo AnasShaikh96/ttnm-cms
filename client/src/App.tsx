@@ -10,6 +10,7 @@ import Drafts from './pages/drafts/Drafts';
 import "preline/preline";
 import { IStaticMethods } from "preline/preline";
 import { useEffect } from 'react';
+import EditPost from './pages/posts/EditPost';
 declare global {
   interface Window {
     HSStaticMethods: IStaticMethods;
@@ -35,7 +36,7 @@ function App() {
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/posts' element={<Posts />} />
             <Route path='/new-post' element={<NewPost />} />
-            <Route path='/edit-post/:id' element={<NewPost />} />
+            <Route path='/edit-post/:id' element={<EditPost />} />
             <Route path='/drafts' element={<Drafts />} />
 
           </Route>
