@@ -49,5 +49,27 @@ module.exports = {
       })
     }
 
-  }
+  },
+  findOneBlog: async (req, res) => {
+
+    try {
+
+      const { id } = req.query
+
+      const getBlogs = await BlogModel.find({ _id: id })
+      res.status(200).json({
+        status: true,
+        data: getBlogs
+      })
+
+    } catch (error) {
+      res.status(500).json({
+        status: false,
+        error: {
+          message: 'An error occured'
+        }
+      })
+    }
+
+  },
 }
