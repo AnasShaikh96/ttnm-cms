@@ -72,4 +72,27 @@ module.exports = {
     }
 
   },
+
+  updateBlog: async (req, res) => {
+    try {
+
+      const { id, title, content } = req.body
+
+      console.log
+
+      const updateBlog = await BlogModel.findAndUpdate(id, { title: title, content: content });
+      res.status(200).json({
+        status: true,
+        data: updateBlog
+      })
+
+    } catch (error) {
+      res.status(500).json({
+        status: false,
+        error: {
+          message: error + 'An error occured while Updating'
+        }
+      })
+    }
+  }
 }

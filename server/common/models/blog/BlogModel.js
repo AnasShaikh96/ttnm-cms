@@ -22,4 +22,7 @@ module.exports = {
   find: (blog) => {
     return this.model.find(blog)
   },
+  findAndUpdate: (id, data) => {
+    return this.model.findOneAndUpdate({ _id: id }, data)
+  }
 }
