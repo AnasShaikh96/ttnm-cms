@@ -1,58 +1,53 @@
 import { useEffect, useState } from "react";
 import TextEditor from "../../components/textEditor/TextEditor";
 import Button from "../../components/Button";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAPI from "../../hooks/useAPI";
+import axios from "axios";
 
 
 export default function EditPost() {
   const [value, setValue] = useState('');
 
+  const navigate = useNavigate()
+
   const location = useLocation();
   const splitURL = location.pathname.split('/');
 
-  console.log(splitURL[2])
+  const [title, setTitle] = useState('')
 
-  const getEditBlog = useAPI()
-
-
-  // useEffect(() => {
-
-  //   let getContent = window.localStorage.getItem('blogContent');
-  //   let parseContent = getContent ? JSON.parse(getContent) : '';
-
-  //   setValue(parseContent)
-  // }, [])
-
-  // useEffect(() => {
-  //   if (value.length !== 0) {
-  //     window.localStorage.setItem('blogContent', JSON.stringify(value))
-  //   }
-  // }, [value])
-
-  const [data, setData] = useState([])
+  const [data, setData] = useState<any>([])
 
   useEffect(() => {
 
     const fetchEditData = async () => {
 
-      await getEditBlog.getData(`/blog/findOne?id=${splitURL[2]}`)
+      await axios.get(`http://localhost:3001/blog/findOne?id=${splitURL[2]}`).then((data) => setData(data.data.data))
+
     }
     fetchEditData()
-
 
   }, [])
 
   useEffect(() => {
 
-    const getData = getEditBlog.data
-
-    setData(getData)
-  }, [getEditBlog.data])
-
+    setValue(data[0]?.content ?? '')
+    setTitle(data[0]?.title ?? '')
+  }, [data])
 
 
-  console.log('data', data)
+
+  const UpdatePostAndNavigate = async () => {
+
+    await axios.post(`http://localhost:3001/blog/update`, {
+      id: splitURL[2],
+      title,
+      content: value
+    }).then(() => navigate('/posts'))
+  }
+
+
+
 
 
   return (
@@ -66,11 +61,11 @@ export default function EditPost() {
           <label className="text-xl font-normal" htmlFor="title">
             Blog Title
           </label>
-          <input type="text" className="border block px-2 py-2 w-full rounded-lg focus:outline-gray-300" />
+          <input type="text" className="border block px-2 py-2 w-full rounded-lg focus:outline-gray-300" value={title} onChange={(e) => setTitle(e.target.value)} />
         </div>
         <div className="flex items-end justify-end">
           <Button title="Save as Draft" variant="secondary" classProps="me-3" />
-          <Button title="Post" variant="primary" />
+          <Button title="Post" variant="primary" onClick={() => UpdatePostAndNavigate()} />
         </div>
       </div>
 
