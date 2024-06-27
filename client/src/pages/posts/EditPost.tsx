@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import TextEditor from "../../components/textEditor/TextEditor";
 import Button from "../../components/Button";
 import { useLocation, useNavigate } from "react-router-dom";
-import useAPI from "../../hooks/useAPI";
 import axios from "axios";
 
 
@@ -45,9 +44,6 @@ export default function EditPost() {
       content: value
     }).then(() => navigate('/posts'))
   }
-
-
-
 
 
   return (

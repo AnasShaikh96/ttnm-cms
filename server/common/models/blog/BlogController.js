@@ -76,11 +76,9 @@ module.exports = {
   updateBlog: async (req, res) => {
     try {
 
-      const { id, title, content } = req.body
+      const { id, title, content, status } = req.body
 
-      console.log
-
-      const updateBlog = await BlogModel.findAndUpdate(id, { title: title, content: content });
+      const updateBlog = await BlogModel.findAndUpdate(id, { title: title, content: content, status: status });
       res.status(200).json({
         status: true,
         data: updateBlog
