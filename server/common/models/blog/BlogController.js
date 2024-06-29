@@ -15,7 +15,7 @@ module.exports = {
       const blog = await BlogModel.create({ title, content });
 
       res.status(200).json({
-        status: true,
+        status: 'success',
         data: blog
       })
 
