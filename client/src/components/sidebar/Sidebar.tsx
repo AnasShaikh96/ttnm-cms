@@ -6,6 +6,29 @@ import HamburgerIcon from "../../assets/icons/HamburgerIcon";
 import PostIcon from "../../assets/icons/PostIcon";
 
 export default function Sidebar() {
+
+  const sidebarContent = [
+    {
+      id: 1,
+      title: 'Dashboard',
+      url: '/dashboard',
+      icon: <DashboardIcon />
+    },
+    {
+      id: 2,
+      title: 'Posts',
+      url: '/posts',
+      icon: <PostIcon />
+    },
+    {
+      id: 3,
+      title: 'Drafts',
+      url: '/drafts',
+      icon: <DraftsIcon />
+    },
+  ]
+
+
   return (
     <>
       <div className="sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden dark:bg-neutral-800 dark:border-neutral-700">
@@ -44,24 +67,22 @@ export default function Sidebar() {
 
         <nav className="hs-accordion-group p-6 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
           <ul className="space-y-1.5">
-            <li>
-              <NavLink to={'/dashboard'} className={"flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-700 dark:text-white"}  >
-                <DashboardIcon />
-                Dashboard
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/posts" className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-300" >
-                <PostIcon />
-                Posts
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/drafts" className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300" >
-                <DraftsIcon />
-                Drafts
-              </NavLink>
-            </li>
+            {sidebarContent.map((item) => (
+              <li key={item.id}>
+                <NavLink to={item.url}
+                  className={({ isActive }) => {
+                    let listStyle = "w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-300"
+
+                    if (isActive) return listStyle + " bg-gray-100"
+                    
+                    return listStyle;
+                  }}
+                >
+                  {item.icon}
+                  {item.title}
+                </NavLink>
+              </li>
+            ))}
           </ul>
         </nav>
       </div>
