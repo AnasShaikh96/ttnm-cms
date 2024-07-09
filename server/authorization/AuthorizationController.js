@@ -59,9 +59,13 @@ module.exports = {
       }
 
       const encryptedPassword = encryptPassword(password)
-      const token = generateAccessToken(email, password)
       const user = await UserModel.find({ email });
 
+      if (user[0].password !== encryptedPassword) {
+        throw new Error('Password Does not Match');
+      }
+
+      const token = generateAccessToken(email, password)
 
       res.status(200).json({
         status: true,

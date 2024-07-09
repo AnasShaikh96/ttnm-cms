@@ -33,7 +33,6 @@ module.exports = {
   findAllBlogs: async (req, res) => {
 
     try {
-
       const getBlogs = await BlogModel.find()
       res.status(200).json({
         status: true,
