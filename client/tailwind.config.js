@@ -1,9 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 
 const colors = require('tailwindcss/colors')
-const withMT = require("@material-tailwind/react/utils/withMT");
 
-module.exports = withMT({
+module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}", 'node_modules/preline/dist/*.js'],
   theme: {
     extend: {
@@ -16,5 +15,5 @@ module.exports = withMT({
     require('@tailwindcss/typography'),
     require('preline/plugin'),
   ],
-})
+}
 

@@ -1,5 +1,4 @@
 
-import { Button, Input } from "@material-tailwind/react";
 import ArrowLeft from "../../assets/icons/ArrowLeft";
 
 export default function Register() {
@@ -11,38 +10,41 @@ export default function Register() {
 
         <div className="grid grid-cols-2 gap-x-4">
           <div className="mb-7">
-            <Input variant="outlined" color="gray" label="First Name" type="text" placeholder="First Name" crossOrigin={undefined} />
+            {/* <Input variant="outlined" color="gray" label="First Name" type="text" placeholder="First Name" crossOrigin={undefined} /> */}
           </div>
           <div className="mb-7">
-            <Input variant="outlined" color="gray" label="Last Name" type="text" placeholder="Last Name" crossOrigin={undefined} />
+            {/* <Input variant="outlined" color="gray" label="Last Name" type="text" placeholder="Last Name" crossOrigin={undefined} /> */}
           </div>
         </div>
 
         <div className="mb-7 w-1/2 pe-3">
-          <Input variant="outlined" color="gray" label="Age" type="text" placeholder="Age" crossOrigin={undefined} />
+          {/* <Input variant="outlined" color="gray" label="Age" type="text" placeholder="Age" crossOrigin={undefined} /> */}
         </div>
 
         <div className="grid grid-cols-2 gap-x-4">
           <div className="mb-7">
-            <Input variant="outlined" color="gray" label="City" type="text" placeholder="City" crossOrigin={undefined} />
+            {/* <Input variant="outlined" color="gray" label="City" type="text" placeholder="City" crossOrigin={undefined} /> */}
           </div>
           <div className="mb-7">
-            <Input variant="outlined" color="gray" label="State" type="text" placeholder="State" crossOrigin={undefined} />
+            {/* <Input variant="outlined" color="gray" label="State" type="text" placeholder="State" crossOrigin={undefined} /> */}
           </div>
         </div>
 
         <div className="mb-7">
-          <Input variant="outlined" color="gray" label="Email" type="email" placeholder="Email" crossOrigin={undefined} />
+          {/* <Input variant="outlined" color="gray" label="Email" type="email" placeholder="Email" crossOrigin={undefined} /> */}
         </div>
         <div className="mb-10">
-          <Input variant="outlined" color="gray" label="Password" type="password" placeholder="Password" crossOrigin={undefined} />
+          {/* <Input variant="outlined" color="gray" label="Password" type="password" placeholder="Password" crossOrigin={undefined} /> */}
         </div>
 
         <div className="grid grid-cols-2 gap-x-4">
-          <Button variant="text" color="deep-purple" className=" flex items-center gap-3 justify-center">
-            <ArrowLeft classProps={'size-4'} />
-            Back</Button>
-          <Button variant="filled" color="deep-purple">Sign Up</Button>
+          {/* <Button variant="text" color="deep-purple" className=" flex items-center gap-3 justify-center"> */}
+          <ArrowLeft classProps={'size-4'} />
+          Back
+          {/* </Button> */}
+          {/* <Button variant="filled" color="deep-purple"> */}
+          Sign Up
+          {/* </Button> */}
         </div>
 
         {/*
