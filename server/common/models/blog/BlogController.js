@@ -1,4 +1,5 @@
 const BlogModel = require('./BlogModel')
+const UserModel = require('../user/UserModel')
 
 
 module.exports = {
@@ -6,17 +7,27 @@ module.exports = {
 
     try {
 
-      const { title, content } = req.body
+      const { title, content } = req.body;
+      const { email } = req.user;
 
+ 
       if (!title || !content) {
         throw new Error('Title or Content is missing.')
       }
 
-      const blog = await BlogModel.create({ title, content });
+      const user = await UserModel.find({ email });
+      if (!user) {
+        throw new Error('User not found.');
+      }
+
+      const blog = await BlogModel.create({ title, content, createdBy: user._id });
+
+      const populatedBlog = await BlogModel.find(blog._id).populate('createdBy');
+
 
       res.status(200).json({
         status: 'success',
-        data: blog
+        data: populatedBlog
       })
 
 
@@ -34,6 +45,11 @@ module.exports = {
 
     try {
       const getBlogs = await BlogModel.find()
+      const { email } = req.user;
+
+      const getUser = await UserModel.find({ email });
+      console.log(getUser)
+
       res.status(200).json({
         status: true,
         data: getBlogs

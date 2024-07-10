@@ -14,7 +14,10 @@ const UserModel = new mongoose.Schema({
   },
   password: {
     type: String
-  }
+  },
+  createdBlogs: [{
+    type: mongoose.Schema.Types.ObjectId, ref: 'blogs'  // Array for many-to-many relationship
+  }]
 })
 
 
@@ -28,7 +31,7 @@ module.exports = {
   find: (query) => {
     return this.model.find(query)
   },
-  update: (query) => {
-    return this.query.update(query)
+  update: (id, data) => {  // Corrected this method
+    return this.model.findOneAndUpdate({ _id: id }, data);
   }
 } 
