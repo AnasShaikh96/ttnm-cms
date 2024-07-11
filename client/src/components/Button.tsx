@@ -13,11 +13,11 @@ export default function Button({ title, variant, width, classProps, onClick }: I
 
   let btnVariant: string = '';
   if (variant === 'primary') {
-    btnVariant = 'border-black text-white bg-black  hover:text-black hover:bg-white '
+    btnVariant = ' border-violet-700 text-white bg-violet-700 transition-all  hover:shadow-sm hover:shadow-violet-500 hover:transition-all'
   } else if (variant === 'secondary') {
-    btnVariant = 'border-black text-black  hover:text-white hover:bg-black '
+    btnVariant = 'border-gray-400 text-gray-700'
   } else {
-    btnVariant = 'border-gray-700 text-black  hover:text-white hover:bg-gray-700 '
+    btnVariant = 'border-gray-700 text-gray-800 hover:text-white hover:bg-gray-700 '
   }
 
 
