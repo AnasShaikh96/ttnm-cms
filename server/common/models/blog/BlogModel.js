@@ -7,7 +7,9 @@ const BlogModel = new mongoose.Schema({
   title: { type: String },
   content: { type: String },
   createdBy: {
-    type: mongoose.Schema.Types.ObjectId, ref: 'user'
+    id: {
+      type: mongoose.Schema.Types.ObjectId, ref: 'user'
+    }
   },
   status: { type: String, default: 'Active' },
   createdAt: { type: Date, default: Date.now },

@@ -10,7 +10,7 @@ module.exports = {
       const { title, content } = req.body;
       const { email } = req.user;
 
- 
+
       if (!title || !content) {
         throw new Error('Title or Content is missing.')
       }
@@ -20,10 +20,13 @@ module.exports = {
         throw new Error('User not found.');
       }
 
-      const blog = await BlogModel.create({ title, content, createdBy: user._id });
+      const blog = await BlogModel.create({ title, content, createdBy: { id: user[0]._id } });
+
+      await UserModel.update(user[0]._id, { $push: { createdBlogs: blog._id } });
 
       const populatedBlog = await BlogModel.find(blog._id).populate('createdBy');
 
+      // console.log('user', user[0]._id._id)
 
       res.status(200).json({
         status: 'success',
