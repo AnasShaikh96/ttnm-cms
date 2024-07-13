@@ -1,5 +1,7 @@
 
 import ArrowLeft from "../../assets/icons/ArrowLeft";
+import Button from "../../components/Button";
+import Input from "../../components/Input";
 
 export default function Register() {
   return (
@@ -10,19 +12,23 @@ export default function Register() {
 
         <div className="grid grid-cols-2 gap-x-4">
           <div className="mb-7">
+            <Input title={'First Name'} type="text" />
             {/* <Input variant="outlined" color="gray" label="First Name" type="text" placeholder="First Name" crossOrigin={undefined} /> */}
           </div>
           <div className="mb-7">
+            <Input title={'Last Name'} type="text" />
             {/* <Input variant="outlined" color="gray" label="Last Name" type="text" placeholder="Last Name" crossOrigin={undefined} /> */}
           </div>
         </div>
 
         <div className="mb-7 w-1/2 pe-3">
+          <Input title={'Age'} type="text" />
           {/* <Input variant="outlined" color="gray" label="Age" type="text" placeholder="Age" crossOrigin={undefined} /> */}
         </div>
 
         <div className="grid grid-cols-2 gap-x-4">
           <div className="mb-7">
+            {/* <Input title={'Last Name'} type="text" /> */}
             {/* <Input variant="outlined" color="gray" label="City" type="text" placeholder="City" crossOrigin={undefined} /> */}
           </div>
           <div className="mb-7">
@@ -31,9 +37,12 @@ export default function Register() {
         </div>
 
         <div className="mb-7">
+          <Input title={'Email'} type="email" />
           {/* <Input variant="outlined" color="gray" label="Email" type="email" placeholder="Email" crossOrigin={undefined} /> */}
         </div>
         <div className="mb-10">
+          <Input title={'Password'} type="pass" />
+
           {/* <Input variant="outlined" color="gray" label="Password" type="password" placeholder="Password" crossOrigin={undefined} /> */}
         </div>
 
@@ -43,7 +52,8 @@ export default function Register() {
           Back
           {/* </Button> */}
           {/* <Button variant="filled" color="deep-purple"> */}
-          Sign Up
+          <Button variant="primary" btnType="button" title="Sign Up" />
+
           {/* </Button> */}
         </div>
 
