@@ -1,9 +1,10 @@
 
-import ArrowLeft from "../../assets/icons/ArrowLeft";
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 
 export default function Register() {
+  const navigate = useNavigate()
   return (
     <div className="w-screen h-screen flex justify-center items-center bg-gray-100 py-10">
       <div className="w-[36rem] h-fit border p-10 rounded-lg bg-white shadow-md shadow-black-700">
@@ -26,59 +27,21 @@ export default function Register() {
           {/* <Input variant="outlined" color="gray" label="Age" type="text" placeholder="Age" crossOrigin={undefined} /> */}
         </div>
 
-        <div className="grid grid-cols-2 gap-x-4">
-          <div className="mb-7">
-            {/* <Input title={'Last Name'} type="text" /> */}
-            {/* <Input variant="outlined" color="gray" label="City" type="text" placeholder="City" crossOrigin={undefined} /> */}
-          </div>
-          <div className="mb-7">
-            {/* <Input variant="outlined" color="gray" label="State" type="text" placeholder="State" crossOrigin={undefined} /> */}
-          </div>
-        </div>
-
         <div className="mb-7">
           <Input title={'Email'} type="email" />
           {/* <Input variant="outlined" color="gray" label="Email" type="email" placeholder="Email" crossOrigin={undefined} /> */}
         </div>
         <div className="mb-10">
-          <Input title={'Password'} type="pass" />
+          <Input title={'Password'} type="password" />
 
           {/* <Input variant="outlined" color="gray" label="Password" type="password" placeholder="Password" crossOrigin={undefined} /> */}
         </div>
 
         <div className="grid grid-cols-2 gap-x-4">
-          {/* <Button variant="text" color="deep-purple" className=" flex items-center gap-3 justify-center"> */}
-          <ArrowLeft classProps={'size-4'} />
-          Back
-          {/* </Button> */}
-          {/* <Button variant="filled" color="deep-purple"> */}
+          <Button title={'Back'} onClick={() => navigate('/')} />
           <Button variant="primary" btnType="button" title="Sign Up" />
-
-          {/* </Button> */}
         </div>
 
-        {/*
-         <div className="grid grid-cols-2 gap-x-4">
-          <div className="mb-3">
-            <label htmlFor="firstName" className="text-gray-500">First Name</label>
-            <input type="text" name="firstName" className="w-full border p-1.5 rounded-lg focus:outline-gray-300" />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="lastName" className="text-gray-500">Last Name</label>
-            <input type="text" name="lastName" className="w-full border p-1.5 rounded-lg focus:outline-gray-300" />
-          </div>
-        </div> */}
-
-        {/* <label htmlFor="email" className="text-gray-500">Email</label>
-        <input type="email" name="email" className="w-full border p-2 mb-3 rounded-lg focus:outline-gray-300" />
-
-        <label htmlFor="password" className="text-gray-500">Password</label>
-        <input type="password" name="password" className="w-full border p-2 mb-6 rounded-lg focus:outline-gray-300" />
-
-        <div className="grid grid-cols-2 gap-x-4">
-          <Button title="Back" variant="secondary" />
-          <Button title="Register" variant="primary" />
-        </div> */}
       </div>
     </div>
   )
