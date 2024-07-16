@@ -1,13 +1,33 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import axios from "axios";
+import { useState } from "react";
 
 export default function Login() {
   const navigate = useNavigate();
 
-  const HandleSubmit = (e: React.FormEvent) => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  })
+
+  const HandleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log(e)
+
+    await axios.post('http://localhost:3001/login', {
+      ...formData
+    }).then((data) => {
+
+      const expirationTime = new Date().getTime() + (60 * 60)
+
+      localStorage.setItem('token', data.data.token)
+      localStorage.setItem('expiresIn', JSON.stringify(expirationTime))
+
+      navigate('/dashboard');
+
+    }).catch((err) => console.log(err))
+
   }
 
   return (
@@ -18,10 +38,10 @@ export default function Login() {
 
         <form onSubmit={(e) => HandleSubmit(e)}>
           <div className="mb-7">
-            <Input title={'Email'} type="email" />
+            <Input title={'Email'} type="email" HandleChange={(e: any) => setFormData({ ...formData, email: e.target.value })} />
           </div>
           <div className="mb-10">
-            <Input title={'Password'} type="password" />
+            <Input title={'Password'} type="password" HandleChange={(e: any) => setFormData({ ...formData, password: e.target.value })} />
           </div>
           <div className="grid grid-cols-2 gap-x-4 ">
             <Button title="Login" variant="primary" btnType="submit" classProps="order-last" />
