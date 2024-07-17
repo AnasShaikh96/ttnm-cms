@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-import axios from "axios";
 import { useState } from "react";
+import useAxios from "../../hooks/axiosInstance";
 
 export default function Login() {
   const navigate = useNavigate();
+
+  const loginAPI = useAxios()
 
   const [formData, setFormData] = useState({
     email: '',
@@ -15,19 +17,17 @@ export default function Login() {
   const HandleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    await axios.post('http://localhost:3001/login', {
-      ...formData
-    }).then((data) => {
+    await loginAPI.post('http://localhost:3001/login', { ...formData })
+      .then((data) => {
 
-      const expirationTime = new Date().getTime() + (60 * 60)
+        const expirationTime = new Date().getTime() + (60 * 60)
+        localStorage.setItem('token', data.data.token)
+        localStorage.setItem('expiresIn', JSON.stringify(expirationTime))
 
-      localStorage.setItem('token', data.data.token)
-      localStorage.setItem('expiresIn', JSON.stringify(expirationTime))
+        navigate('/posts');
 
-      navigate('/dashboard');
-
-    }).catch((err) => console.log(err))
-
+      })
+      .catch((err) => console.log(err))
   }
 
   return (

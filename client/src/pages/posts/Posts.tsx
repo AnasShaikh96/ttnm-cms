@@ -4,11 +4,11 @@ import LinkCell from "../../components/Cell/LinkCell"
 import StatusCell from "../../components/Cell/StatusCell"
 import TitleCell from "../../components/Cell/TitleCell"
 import { useEffect, useState } from "react"
-import useAPI from "../../hooks/useAPI"
+import useAxios from "../../hooks/axiosInstance"
 
 export default function Posts() {
 
-  const postsApi = useAPI()
+  const getPosts = useAxios()
 
   const postHeader = [
     {
@@ -45,38 +45,32 @@ export default function Posts() {
   useEffect(() => {
 
     const fetchAllPosts = async () => {
-      await postsApi.getData('/blog/findAll');
+
+      await getPosts.get('/blog/findAll').then((res) => {
+
+        const rawData: any = res.data.data;
+
+        const formattedData = rawData?.map(({ title, createdAt, updatedAt, ...rest }: { title: string, createdAt: Date, updatedAt: Date, rest: any }) => {
+          const formatDate = (getDate: Date) => new Date(getDate).toLocaleDateString('en-IN',
+            { timeZone: 'IST', month: "short", day: "2-digit", year: "numeric", hour: '2-digit', minute: '2-digit' },
+          )
+
+          return {
+            title,
+            slug_name: `/${title.replaceAll(" ", "-").toLowerCase()}`,
+            createdAt: formatDate(createdAt),
+            updatedAt: formatDate(updatedAt),
+            ...rest
+          }
+        }) ?? []
+
+        setPostData(formattedData)
+      })
     }
 
     fetchAllPosts()
   }, [])
 
-  useEffect(() => {
-
-
-    const rawData: any = postsApi.data;
-
-    const formattedData = rawData?.data?.map(({ title, createdAt, updatedAt, ...rest }: { title: string, createdAt: Date, updatedAt: Date, rest: any }) => {
-
-
-      const formatDate = (getDate: Date) => new Date(getDate).toLocaleDateString('en-IN',
-        { timeZone: 'IST', month: "short", day: "2-digit", year: "numeric", hour: '2-digit', minute: '2-digit' },
-      )
-
-
-      return {
-        title,
-        slug_name: `/${title.replaceAll(" ", "-").toLowerCase()}`,
-        createdAt: formatDate(createdAt),
-        updatedAt: formatDate(updatedAt),
-        ...rest
-      }
-    }) ?? []
-
-    setPostData(formattedData)
-
-
-  }, [postsApi.data])
 
   return (
     <section>
