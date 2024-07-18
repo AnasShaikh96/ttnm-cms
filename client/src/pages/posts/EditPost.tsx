@@ -3,12 +3,16 @@ import TextEditor from "../../components/textEditor/TextEditor";
 import Button from "../../components/Button";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import useAxios from "../../hooks/axiosInstance";
 
 
 export default function EditPost() {
   const [value, setValue] = useState('');
 
   const navigate = useNavigate()
+
+  const editDataAPI = useAxios();
+  const updateDataAPI = useAxios()
 
   const location = useLocation();
   const splitURL = location.pathname.split('/');
@@ -21,7 +25,12 @@ export default function EditPost() {
 
     const fetchEditData = async () => {
 
-      await axios.get(`http://localhost:3001/blog/findOne?id=${splitURL[2]}`).then((data) => setData(data.data.data))
+
+      await editDataAPI.get(`/blog/findOne?id=${splitURL[2]}`)
+        .then((res) => setData(res.data.data))
+        .catch((err) => console.log(err))
+
+      // await axios.get(`http://localhost:3001/blog/findOne?id=${splitURL[2]}`).then((data) => setData(data.data.data))
 
     }
     fetchEditData()
@@ -38,11 +47,12 @@ export default function EditPost() {
 
   const UpdatePostAndNavigate = async () => {
 
-    await axios.post(`http://localhost:3001/blog/update`, {
+    await updateDataAPI.post(`http://localhost:3001/blog/update`, {
       id: splitURL[2],
       title,
       content: value
     }).then(() => navigate('/posts'))
+      .catch(err => console.log(err))
   }
 
 

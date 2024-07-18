@@ -3,13 +3,16 @@ import TextEditor from "../../components/textEditor/TextEditor";
 import Button from "../../components/Button";
 import useAPI from "../../hooks/useAPI";
 import { useNavigate } from "react-router-dom";
+import useAxios from "../../hooks/axiosInstance";
 
 
 export default function NewPost() {
 
   const navigate = useNavigate()
 
-  const contentAPI = useAPI();
+  // const contentAPI = useAPI();
+
+  const contentAPI = useAxios()
 
   const [value, setValue] = useState('');
   const [title, setTitle] = useState('');
@@ -33,11 +36,12 @@ export default function NewPost() {
 
   const fetchContentAPI = async () => {
 
-    await contentAPI.postData('/blog/create', { title, content: value }).then(() => {
-      navigate('/posts')
-    })
+    await contentAPI.post('/blog/create', { title, content: value }).then((res) => {
 
-    setcontentData(contentAPI.data)
+      setcontentData(res.data.data)
+
+      navigate('/posts')
+    }).catch((err) => console.log(err))
 
   }
 

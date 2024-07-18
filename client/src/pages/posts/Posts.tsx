@@ -65,7 +65,7 @@ export default function Posts() {
         }) ?? []
 
         setPostData(formattedData)
-      })
+      }).catch((err) => console.log(err))
     }
 
     fetchAllPosts()
