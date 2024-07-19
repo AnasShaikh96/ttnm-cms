@@ -26,8 +26,6 @@ module.exports = {
 
       const populatedBlog = await BlogModel.find(blog._id).populate('createdBy');
 
-      // console.log('user', user[0]._id._id)
-
       res.status(200).json({
         status: 'success',
         data: populatedBlog
@@ -47,11 +45,11 @@ module.exports = {
   findAllBlogs: async (req, res) => {
 
     try {
-      const getBlogs = await BlogModel.find()
       const { email } = req.user;
 
       const getUser = await UserModel.find({ email });
-      console.log(getUser)
+
+      const getBlogs = await BlogModel.find({ '_id': { $in: getUser[0].createdBlogs } })
 
       res.status(200).json({
         status: true,
@@ -59,6 +57,7 @@ module.exports = {
       })
 
     } catch (error) {
+      console.log(error)
       res.status(500).json({
         status: false,
         error: {
