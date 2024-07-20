@@ -1,0 +1,25 @@
+services:
+  frontend:
+    build: ./client
+    image: client-tt
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./client:/app:delegated"
+      - /app/node_modules
+  backend:
+    build: ./server
+    image: server-tt
+    stdin_open: true
+    environment:
+      - MONGO_URI=mongodb://mongodb-myapp:27017/medium-clone
+    ports:
+      - "3001:3001"
+    volumes:
+      - "./server:/app:delegated"
+      - /app/node_modules
+  mongodb-myapp: 
+    image: mongo
+    ports:
+      - "27017:27017"
