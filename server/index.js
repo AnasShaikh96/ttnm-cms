@@ -3,7 +3,7 @@ const config = require('./config');
 
 const AuthorizationRoutes = require('./authorization/AuthorizationRoutes')
 const BlogRoutes = require('./common/models/blog/BlogRoutes')
-
+ 
 const app = express()
 const mongoose = require('mongoose');
 const cors = require('cors')
@@ -25,7 +25,7 @@ mongoose.connect(config.dbUrl)
     app.use('/', AuthorizationRoutes)
     app.use('/blog', BlogRoutes)
   })
-  .catch(() => console.log('something went wrong'))
+  .catch((err) => console.log('something went wrong', err))
 
 
 app.listen(PORT, () => console.log('Server up at :', PORT))

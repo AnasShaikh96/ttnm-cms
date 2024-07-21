@@ -18,7 +18,7 @@ declare global {
 }
 
 
-function App() {
+function App() { 
   const location = useLocation();
 
   useEffect(() => {
