@@ -3,7 +3,7 @@ const config = require('./config');
 
 const AuthorizationRoutes = require('./authorization/AuthorizationRoutes')
 const BlogRoutes = require('./common/models/blog/BlogRoutes')
- 
+
 const app = express()
 const mongoose = require('mongoose');
 const cors = require('cors')

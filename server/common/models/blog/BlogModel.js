@@ -25,10 +25,10 @@ module.exports = {
   create: (blog) => {
     return this.model.create(blog)
   },
-  find: (blog) => {
-    return this.model.find(blog).populate('createdBy')
+  find: (blog, sortBy, offset, limit) => {
+    return this.model.find(blog).sort(sortBy ?? {}).limit(limit).skip(offset)
   },
   findAndUpdate: (id, data) => {
-    return this.model.findOneAndUpdate({ _id: id }, data).populate('createdBy');
+    return this.model.findOneAndUpdate({ _id: id }, data);
   }
 }

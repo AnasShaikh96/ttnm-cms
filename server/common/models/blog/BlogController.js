@@ -46,10 +46,17 @@ module.exports = {
 
     try {
       const { email } = req.user;
+      const { sort_by, sort_type, page_num, page_size, search_key, } = req.query
+
+
+      let offset = (page_num - 1) * page_size
+      let sortObj = sort_by === undefined || sort_type === undefined ? {} : { [sort_by]: sort_type }
+
 
       const getUser = await UserModel.find({ email });
 
-      const getBlogs = await BlogModel.find({ '_id': { $in: getUser[0].createdBlogs } })
+      const getBlogs = await BlogModel.find({ '_id': { $in: getUser[0].createdBlogs } }, sortObj, page_size, offset)
+
 
       res.status(200).json({
         status: true,
@@ -95,7 +102,7 @@ module.exports = {
 
       const { id, title, content, status } = req.body
 
-      const updateBlog = await BlogModel.findAndUpdate(id, { title: title, content: content, status: status });
+      const updateBlog = await BlogModel.findAndUpdate(id, { title: title, content: content, status: status, updatedAt: new Date() });
       res.status(200).json({
         status: true,
         data: updateBlog

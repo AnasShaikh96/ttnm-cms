@@ -1,31 +1,31 @@
 import { NavLink } from "react-router-dom";
 import ChevronRight from "../../assets/icons/ChevronRight";
-import DashboardIcon from "../../assets/icons/DashboardIcon";
-import DraftsIcon from "../../assets/icons/DraftsIcon";
+// import DashboardIcon from "../../assets/icons/DashboardIcon";
+// import DraftsIcon from "../../assets/icons/DraftsIcon";
 import HamburgerIcon from "../../assets/icons/HamburgerIcon";
 import PostIcon from "../../assets/icons/PostIcon";
 
 export default function Sidebar() {
 
   const sidebarContent = [
-    {
-      id: 1,
-      title: 'Dashboard',
-      url: '/dashboard',
-      icon: <DashboardIcon />
-    },
+    // {
+    //   id: 1,
+    //   title: 'Dashboard',
+    //   url: '/dashboard',
+    //   icon: <DashboardIcon />
+    // },
     {
       id: 2,
       title: 'Posts',
       url: '/posts',
       icon: <PostIcon />
     },
-    {
-      id: 3,
-      title: 'Drafts',
-      url: '/drafts',
-      icon: <DraftsIcon />
-    },
+    // {
+    //   id: 3,
+    //   title: 'Drafts',
+    //   url: '/drafts',
+    //   icon: <DraftsIcon />
+    // },
   ]
 
 
@@ -74,7 +74,7 @@ export default function Sidebar() {
                     let listStyle = "w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-300"
 
                     if (isActive) return listStyle + " bg-gray-100"
-                    
+
                     return listStyle;
                   }}
                 >
