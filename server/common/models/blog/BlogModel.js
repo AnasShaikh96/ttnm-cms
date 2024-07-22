@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 
 
 const BlogModel = new mongoose.Schema({
-  title: { type: String },
+  title: { type: String, index: true },
   content: { type: String },
   createdBy: {
     id: {
@@ -17,13 +17,15 @@ const BlogModel = new mongoose.Schema({
 
 })
 
-BlogModel.index({ 'title': 'text', 'content': 'text' }, {
-  weights: {
-    title: 5,
-    content: 3
-  },
-  name: 'title_content'
-})
+BlogModel.index({ title: 'text' })
+
+// BlogModel.index({ title: 'text', content: 'text' }, {
+//   weights: {
+//     title: 5,
+//     content: 3
+//   },
+//   name: 'title_content'
+// })
 
 // https://stackoverflow.com/questions/57446123/mongoose-not-creating-text-indexes-for-multiple-fields
 
@@ -34,8 +36,8 @@ module.exports = {
   create: (blog) => {
     return this.model.create(blog)
   },
-  find: (blog, sortBy, offset, limit) => {
-    return this.model.find(blog).sort(sortBy ?? {}).limit(limit).skip(offset).find({ $text: { $search: 'rel' } })
+  find: (blog, sortBy, offset, limit, search) => {
+    return this.model.find(blog).sort(sortBy ?? {}).limit(limit).skip(offset).find(search)
   },
   findAndUpdate: (id, data) => {
     return this.model.findOneAndUpdate({ _id: id }, data);
