@@ -6,6 +6,7 @@ import TitleCell from "../../components/Cell/TitleCell"
 import { useEffect, useState } from "react"
 import useAxios from "../../hooks/axiosInstance"
 import ArrowLeft from "../../assets/icons/ArrowLeft"
+import { formatDate } from "../../helpers/formatDate"
 
 export default function Posts() {
 
@@ -47,14 +48,16 @@ export default function Posts() {
 
     const fetchAllPosts = async () => {
 
-      await getPosts.get('/blog/findAll').then((res) => {
+      await getPosts.get('/blog/findAll', {
+        params: {
+          sort_by: 'title',
+          sort_type: 'asc',
+        }
+      }).then((res) => {
 
         const rawData: any = res.data.data;
 
         const formattedData = rawData?.map(({ title, createdAt, updatedAt, ...rest }: { title: string, createdAt: Date, updatedAt: Date, rest: any }) => {
-          const formatDate = (getDate: Date) => new Date(getDate).toLocaleDateString('en-IN',
-            { timeZone: 'IST', month: "short", day: "2-digit", year: "numeric", hour: '2-digit', minute: '2-digit' },
-          )
 
           return {
             title,
