@@ -51,7 +51,7 @@ module.exports = {
 
       let offset = (page_num - 1) * page_size
       let sortObj = sort_by === undefined || sort_type === undefined ? {} : { [sort_by]: sort_type }
-      let searchObj = search_key === undefined ? {} : { $text: { $search: search_key } }
+      let searchObj = search_key === undefined ? {} : { title: { $regex: search_key, $options: 'i' } }     //{ $text: { $search: `/${search_key}/` } }
 
 
       const getUser = await UserModel.find({ email });
