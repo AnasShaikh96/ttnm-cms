@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TextEditor from "../../components/textEditor/TextEditor";
 import Button from "../../components/Button";
-import useAPI from "../../hooks/useAPI";
 import { useNavigate } from "react-router-dom";
 import useAxios from "../../hooks/axiosInstance";
 
@@ -9,46 +8,28 @@ import useAxios from "../../hooks/axiosInstance";
 export default function NewPost() {
 
   const navigate = useNavigate()
-
-  // const contentAPI = useAPI();
-
   const contentAPI = useAxios()
 
   const [value, setValue] = useState('');
   const [title, setTitle] = useState('');
 
-  const [contentData, setcontentData] = useState([])
-
-  // useEffect(() => {
-
-  //   let getContent = window.localStorage.getItem('blogContent');
-  //   let parseContent = getContent ? JSON.parse(getContent) : '';
-
-  //   setValue(parseContent)
-  // }, [])
-
-  // useEffect(() => {
-  //   if (value.length !== 0) {
-  //     window.localStorage.setItem('blogContent', JSON.stringify(value))
-  //   }
-  // }, [value])
-
-
   const fetchContentAPI = async () => {
 
-    await contentAPI.post('/blog/create', { title, content: value }).then((res) => {
-
-      setcontentData(res.data.data)
-
-      navigate('/posts')
-    }).catch((err) => console.log(err))
+    await contentAPI.post('/blog/create', { title, content: value })
+      .then(() => {
+        navigate('/posts')
+      })
+      .catch((err) => console.log(err))
 
   }
 
 
-
-  const HandleClick = () => {
-    fetchContentAPI();
+  const fetchDraftContentAPI = async () => {
+    await contentAPI.post('/blog/create', { title, content: value, status: 'Inactive' })
+      .then(() => {
+        navigate('/posts')
+      })
+      .catch((err) => console.log(err))
   }
 
   return (
@@ -65,8 +46,8 @@ export default function NewPost() {
           <input type="text" className="border block px-2 py-2 w-full rounded-lg focus:outline-gray-300" onChange={(e) => setTitle(e.target.value)} />
         </div>
         <div className="flex items-end justify-end">
-          <Button title="Save as Draft" variant="secondary" classProps="me-3" />
-          <Button title="Post" variant="primary" onClick={() => HandleClick()} />
+          <Button title="Save as Draft" variant="secondary" classProps="me-3" onClick={fetchDraftContentAPI} />
+          <Button title="Post" variant="primary" onClick={fetchContentAPI} />
         </div>
       </div>
 

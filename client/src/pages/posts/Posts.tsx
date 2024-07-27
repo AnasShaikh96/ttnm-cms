@@ -43,6 +43,9 @@ export default function Posts() {
 
 
   const [postData, setPostData] = useState<any>([]);
+  const [tableConfigs, setTableConfigs] = useState({
+    page_num: 2
+  })
 
   const [searchTerm, setSearchTerm] = useState<string | null>(null)
 
@@ -54,11 +57,16 @@ export default function Posts() {
         params: {
           sort_by: 'title',
           sort_type: 'asc',
+          page_size: 5,
+          page_num: tableConfigs.page_num,
           search_key: searchTerm
         }
       }).then((res) => {
 
-        const rawData: any = res.data.data;
+        const rawData: any = res.data.data.data;
+        const tableConfigData = res.data.data.results;
+
+        console.log(tableConfigData)
 
         const formattedData = rawData?.map(({ title, createdAt, updatedAt, ...rest }: { title: string, createdAt: Date, updatedAt: Date, rest: any }) => {
 

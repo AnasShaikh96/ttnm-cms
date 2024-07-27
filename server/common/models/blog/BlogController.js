@@ -7,7 +7,7 @@ module.exports = {
 
     try {
 
-      const { title, content } = req.body;
+      const { title, content, status } = req.body;
       const { email } = req.user;
 
 
@@ -20,7 +20,7 @@ module.exports = {
         throw new Error('User not found.');
       }
 
-      const blog = await BlogModel.create({ title, content, createdBy: { id: user[0]._id } });
+      const blog = await BlogModel.create({ title, content, status, createdBy: { id: user[0]._id } });
 
       await UserModel.update(user[0]._id, { $push: { createdBlogs: blog._id } });
 
@@ -57,11 +57,18 @@ module.exports = {
       const getUser = await UserModel.find({ email });
 
       const getBlogs = await BlogModel.find({ '_id': { $in: getUser[0].createdBlogs } }, sortObj, page_size, offset, searchObj)
-
+      const totalBlogs = await BlogModel.find({ '_id': { $in: getUser[0].createdBlogs } })
 
       res.status(200).json({
         status: true,
-        data: getBlogs
+        data: {
+          results: {
+            current_page: page_num,
+            total_size: totalBlogs.length
+          },
+          data: getBlogs
+
+        }
       })
 
     } catch (error) {

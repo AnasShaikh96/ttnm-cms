@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import TextEditor from "../../components/textEditor/TextEditor";
 import Button from "../../components/Button";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
 import useAxios from "../../hooks/axiosInstance";
 
 
@@ -24,14 +23,9 @@ export default function EditPost() {
   useEffect(() => {
 
     const fetchEditData = async () => {
-
-
       await editDataAPI.get(`/blog/findOne?id=${splitURL[2]}`)
         .then((res) => setData(res.data.data))
         .catch((err) => console.log(err))
-
-      // await axios.get(`http://localhost:3001/blog/findOne?id=${splitURL[2]}`).then((data) => setData(data.data.data))
-
     }
     fetchEditData()
 
@@ -50,7 +44,19 @@ export default function EditPost() {
     await updateDataAPI.post(`http://localhost:3001/blog/update`, {
       id: splitURL[2],
       title,
-      content: value
+      content: value,
+      status: 'Active'
+    }).then(() => navigate('/posts'))
+      .catch(err => console.log(err))
+  }
+
+  const SaveDraftAndNavigate = async () => {
+
+    await updateDataAPI.post(`http://localhost:3001/blog/update`, {
+      id: splitURL[2],
+      title,
+      content: value,
+      status: 'Inactive'
     }).then(() => navigate('/posts'))
       .catch(err => console.log(err))
   }
@@ -70,8 +76,8 @@ export default function EditPost() {
           <input type="text" className="border block px-2 py-2 w-full rounded-lg focus:outline-gray-300" value={title} onChange={(e) => setTitle(e.target.value)} />
         </div>
         <div className="flex items-end justify-end">
-          <Button title="Save as Draft" variant="secondary" classProps="me-3" />
-          <Button title="Post" variant="primary" onClick={() => UpdatePostAndNavigate()} />
+          <Button title="Save as Draft" variant="secondary" classProps="me-3" onClick={SaveDraftAndNavigate} />
+          <Button title="Post" variant="primary" onClick={UpdatePostAndNavigate} />
         </div>
       </div>
 
