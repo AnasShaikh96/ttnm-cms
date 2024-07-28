@@ -63,8 +63,8 @@ module.exports = {
         status: true,
         data: {
           results: {
-            current_page: page_num,
-            total_size: totalBlogs.length
+            total_size: totalBlogs.length,
+            last_page: Math.ceil(totalBlogs.length / page_size)
           },
           data: getBlogs
 

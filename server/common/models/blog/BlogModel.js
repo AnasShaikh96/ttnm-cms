@@ -36,7 +36,7 @@ module.exports = {
   create: (blog) => {
     return this.model.create(blog)
   },
-  find: (blog, sortBy, offset, limit, search) => {
+  find: (blog, sortBy, limit, offset, search) => {
     return this.model.find(blog).sort(sortBy ?? {}).limit(limit).skip(offset).find(search)
   },
   findAndUpdate: (id, data) => {
