@@ -51,13 +51,12 @@ module.exports = {
 
       let offset = (page_num - 1) * page_size
       let sortObj = sort_by === undefined || sort_type === undefined ? {} : { [sort_by]: sort_type }
-      let searchObj = search_key === undefined ? {} : { title: { $regex: search_key, $options: 'i' } }     //{ $text: { $search: `/${search_key}/` } }
-
+      let searchObj = search_key === undefined ? {} : { title: { $regex: search_key, $options: 'i' } }
 
       const getUser = await UserModel.find({ email });
 
-      const getBlogs = await BlogModel.find({ '_id': { $in: getUser[0].createdBlogs } }, sortObj, page_size, offset, searchObj)
-      const totalBlogs = await BlogModel.find({ '_id': { $in: getUser[0].createdBlogs } })
+      const getBlogs = await BlogModel.find({ '_id': { $in: getUser[0].createdBlogs }, ...searchObj }, sortObj, page_size, offset)
+      const totalBlogs = await BlogModel.find({ '_id': { $in: getUser[0].createdBlogs }, ...searchObj })
 
       res.status(200).json({
         status: true,

@@ -65,7 +65,7 @@ export default function Posts() {
       await getPosts.get('/blog/findAll', {
         params: {
           sort_by: 'title',
-          sort_type: 'asc',
+          sort_type: 'desc',
           page_size: 5,
           page_num: currentPage,
           search_key: searchTerm
