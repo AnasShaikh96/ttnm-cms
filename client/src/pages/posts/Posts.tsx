@@ -75,7 +75,11 @@ export default function Posts() {
         const rawData: any = res.data.data.data;
         const tableConfigData = res.data.data.results;
 
+        if (tableConfigData.last_page === 1) {
+          setCurrentPage(1);
+        }
         setTableConfig(tableConfigData)
+
 
         const formattedData = rawData?.map(({ title, createdAt, updatedAt, ...rest }: { title: string, createdAt: Date, updatedAt: Date, rest: any }) => {
 
@@ -93,7 +97,6 @@ export default function Posts() {
     }
 
     fetchAllPosts();
-
   }, [searchTerm, currentPage]);
 
 
@@ -186,7 +189,7 @@ export default function Posts() {
                   <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-neutral-700">
                     <div>
                       <p className="text-sm text-gray-600 dark:text-neutral-400">
-                        <span className="font-semibold text-gray-800 dark:text-neutral-200">Showing {postData.length ?? 0} out of {tableConfig.total_size}</span> 
+                        <span className="font-semibold text-gray-800 dark:text-neutral-200">Showing {postData.length ?? 0} out of {tableConfig.total_size}</span>
                       </p>
                     </div>
 
