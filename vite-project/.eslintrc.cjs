@@ -15,4 +15,31 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
+  overrides:[
+    {
+      files:['**/*.ts', '**/*.tsx'],
+      rules: {
+        'import/no-cycle':'error',
+        'react/prop-types': 'off',
+        'import/order': [
+          'error',
+          {
+            groups: [
+              'builtin',
+              'external',
+              'internal',
+              'parent',
+              'sibling',
+              'index',
+              'object',
+            ],
+            'newlines-between': 'always',
+            alphabetize: { order: 'asc', caseInsensitive: true },
+          },
+        ], 
+      },
+    }
+  ]
+
+ 
 }
