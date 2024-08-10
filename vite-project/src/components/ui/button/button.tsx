@@ -47,7 +47,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       size,
       // asChild = false,
       children,
-      // isLoading,
+      isLoading,
       icon,
       ...props
     },
@@ -59,6 +59,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
+        {isLoading && 'spinner'}
         {icon}
         <span className="mx-2">{children}</span>
       </button>
