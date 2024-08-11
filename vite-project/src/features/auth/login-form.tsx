@@ -12,6 +12,9 @@ export const LoginForm = () => {
       </div>
       <div className="grid grid-cols-2 gap-x-4 ">
         <Button type="button" variant={'default'}>
+          Cancel
+        </Button>
+        <Button type="button" variant={'default'}>
           Submit
         </Button>
         {/* <Button title="Login" variant="primary" btnType="submit" classProps="order-last" /> */}
