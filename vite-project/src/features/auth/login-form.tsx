@@ -11,14 +11,12 @@ export const LoginForm = () => {
         <Input type="password" label="Password" />
       </div>
       <div className="grid grid-cols-2 gap-x-4 ">
-        <Button type="button" variant={'default'}>
+        <Button type="button" variant={'outline'}>
           Cancel
         </Button>
         <Button type="button" variant={'default'}>
           Submit
         </Button>
-        {/* <Button title="Login" variant="primary" btnType="submit" classProps="order-last" /> */}
-        {/* <Button title="Sign Up" variant="secondary" onClick={() => navigate('/register')} /> */}
       </div>
     </form>
   );
